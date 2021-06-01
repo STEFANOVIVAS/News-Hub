@@ -1,0 +1,191 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>SIMIP</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'noticias/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="{% static 'noticias/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'noticias/css/clean-blog.min.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+      
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'noticias:lista_noticias' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'noticias:procurar_noticias' %}">Procurar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">Sample Post</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+   
+    <!-- Page Header -->
+  <header class="masthead" style="background-image: url('../media/img/home-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>SIMIP</h1>
+            <span class="subheading">Sistema de monitoramento Parlamentar</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-preview">
+          {% if page_obj %}
+          {% for noticia in page_obj %}
+          <a href="{{ noticia.get_absolute_url }}">
+            <h2 class="post-title"> {{ noticia.titulo }}</h2>
+          </a>
+          <p class="post-meta">Publicado por {{ noticia.fonte }} em {{ noticia.data_noticia}}</p>
+          <p>{{noticia.conteudo|truncatewords:30|linebreaks}}</p>
+          <hr>
+          {% endfor %}
+          {% else %}
+          {% endif %}
+        </div>
+      </div>  
+      
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-4">
+
+        <!-- Search Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Procurar</h5>
+          <div class="card-body">
+            <form action="{% url 'noticias:procurar_noticias' %}">  
+              <div class="input-group">
+                <input type="text" class="form-control" name="buscar" placeholder="Procurar por...">
+                <span class="input-group-append">
+                  <button class="btn btn-secondary" type="submit">Ir!</button>
+                </span>  
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Categories Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Categorias</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-6">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="{% url 'noticias:noticias_por_veiculo' 'senado' %}"> Senado</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'noticias:noticias_por_veiculo' 'Portal G1' %}">Portal G1</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'noticias:noticias_por_veiculo' 'Uol' %}">Uol</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-6">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="{% url 'noticias:noticias_por_veiculo' 'Ebc - Agência Brasil' %}">Agência Brasil</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'noticias:noticias_por_veiculo' 'Camara' %}">Camara</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.row -->
+    {% include 'noticias/pagination.html' %} 
+  </div>
+  <!-- /.container -->    
+      
+    
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <ul class="list-inline text-center">
+            <li class="list-inline-item">
+              <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+          </ul>
+          <p class="copyright text-muted">Copyright &copy; Your Website 2020</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'noticias/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'noticias/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="{% static 'noticias/js/clean-blog.min.js' %}"></script>
+
+</body>
+
+</html>
