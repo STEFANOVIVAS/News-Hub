@@ -19,21 +19,21 @@ def transforma_string_data(param):
 
 class CrawlingNoticiasPipeline:
     def process_item(self, item, spider):
-        adapter = ItemAdapter(item)
-        if adapter['conteudo']:
-            if 'FGTS' not in adapter['conteudo'] or 'Caixa' not in adapter['conteudo']:
-                raise DropItem(
-                    f"A matéria {item['titulo']} não aborda o tema FGTS")
-            else:
-                try:
-                    data = transforma_string_data(item['data_noticia'])
-                    Noticia.objects.create(
-                        titulo=item['titulo'],
-                        data_noticia=data,
-                        fonte=item['fonte'],
-                        conteudo=item['conteudo'],
-                        url=item['url'],
-                        slug=slugify(item['titulo'])
-                    )
-                except:
-                    print('Esta matéria já consta no banco de dados')
+        # adapter = ItemAdapter(item)
+        # if item['conteudo']:
+        #     if 'FGTS' not in item['conteudo'] or 'Fundo de Garantia' not in item['conteudo']:
+        #         raise DropItem(
+        #             f"A matéria {item['titulo']} não aborda o tema FGTS")
+        data = transforma_string_data(item['data_noticia'])
+        try:
+            Noticia.objects.create(
+                titulo=item['titulo'],
+                data_noticia=data,
+                fonte=item['fonte'],
+                conteudo=item['conteudo'],
+                url=item['url'],
+                slug=slugify(item['titulo'])
+            )
+        except:
+            print('Esta matéria já foi adicionada ao banco de dados')
+        return item

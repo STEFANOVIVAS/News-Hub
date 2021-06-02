@@ -7,7 +7,7 @@ from django.core.paginator import Paginator
 
 def lista_noticias(request):
     noticias = Noticia.objects.order_by('-data_noticia')
-    paginator = Paginator(noticias, 3)
+    paginator = Paginator(noticias, 20)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request, 'noticias/lista_noticias.html', {'page_obj': page_obj})
