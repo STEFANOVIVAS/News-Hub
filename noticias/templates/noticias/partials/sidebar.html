@@ -1,0 +1,47 @@
+<!-- Sidebar Widgets Column -->
+<div class="col-md-4">
+    <div class="card my-4">
+      <h5 class="card-header">Procurar</h5>
+      <div class="card-body">
+        <form action="{% url 'noticias:procurar_noticias' %}">  
+          <div class="input-group">
+            <input type="text" class="form-control" name="buscar" placeholder="Procurar por...">
+            <span class="input-group-append">
+              <button class="btn btn-secondary" type="submit">Ir!</button>
+            </span>  
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Categories Widget -->
+    <div class="card my-4">
+      <h5 class="card-header">Categorias</h5>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-6">
+            <ul class="list-unstyled mb-0">
+              <li>
+                <a href="{% url 'noticias:noticias_por_veiculo' 'senado' %}"> Senado</a>
+              </li>
+              <li>
+                <a href="{% url 'noticias:noticias_por_veiculo' 'Portal G1' %}">Portal G1</a>
+              </li>
+              <li>
+                <a href="{% url 'noticias:noticias_por_veiculo' 'Uol' %}">Uol</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-6">
+            <ul class="list-unstyled mb-0">
+              <li>
+                <a href="{% url 'noticias:noticias_por_veiculo' 'Ebc - Agência Brasil' %}">Agência Brasil</a>
+              </li>
+              <li>
+                <a href="{% url 'noticias:noticias_por_veiculo' 'Camara' %}">Camara</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

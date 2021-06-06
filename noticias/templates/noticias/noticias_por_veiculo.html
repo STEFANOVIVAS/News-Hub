@@ -1,7 +1,2 @@
-<ul>
-    {% for noticia in noticias_veiculo %}
-        <li>
-            <a href="{{noticia.get_absolute_url}}"> {{noticia.titulo}}</a>
-        </li>
-    {% endfor %}    
-</ul>
+{% extends 'noticias/lista_noticias.html' %}
+

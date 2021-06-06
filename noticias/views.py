@@ -37,7 +37,10 @@ def procurar_noticias(request):
 
 def noticias_por_veiculo(request, fonte):
     noticias_veiculo = Noticia.objects.filter(fonte__contains=fonte)
-    return render(request, 'noticias/noticias_por_veiculo.html', {'noticias_veiculo': noticias_veiculo})
+    paginator = Paginator(noticias_veiculo, 20)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'noticias/noticias_por_veiculo.html', {'page_obj': page_obj})
 
 
 def compartilha_noticia(request, slug):
