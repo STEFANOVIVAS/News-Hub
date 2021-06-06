@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Noticia
 from django.core.paginator import Paginator
-
+from .forms import ShareNoticiaForm
+from django.core.mail import send_mail
 # Create your views here.
 
 
@@ -13,10 +14,10 @@ def lista_noticias(request):
     return render(request, 'noticias/lista_noticias.html', {'page_obj': page_obj})
 
 
-def detalha_noticias(request, slug):
-    noticias = get_object_or_404(Noticia, slug=slug)
+def detalha_noticia(request, slug):
+    noticia = get_object_or_404(Noticia, slug=slug)
 
-    return render(request, 'noticias/detalha_noticias.html', {'noticias': noticias})
+    return render(request, 'noticias/detalha_noticia.html', {'noticia': noticia})
 
 
 def procurar_noticias(request):
@@ -37,3 +38,26 @@ def procurar_noticias(request):
 def noticias_por_veiculo(request, fonte):
     noticias_veiculo = Noticia.objects.filter(fonte__contains=fonte)
     return render(request, 'noticias/noticias_por_veiculo.html', {'noticias_veiculo': noticias_veiculo})
+
+
+def compartilha_noticia(request, slug):
+    noticia = get_object_or_404(Noticia, slug=slug)
+    sent = False
+    if request.method == 'POST':
+        form = ShareNoticiaForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            post_url = request.build_absolute_uri(noticia.get_absolute_url())
+            subject = f"{cd['nome']} recomenda que você leia" \
+                f"{noticia.titulo}"
+            message = f" Leia {noticia.titulo} em {post_url} \n\n" \
+                f"{cd['nome']}\'s comments: {cd['comentarios']}"
+            send_mail(subject, message, 'admin@myblog.com', [cd['send_to']])
+
+            sent = True
+
+    else:
+        form = ShareNoticiaForm()
+    return render(request, "noticias/compartilha_noticia.html", {'form': form,
+                                                                 'noticia': noticia,
+                                                                 'sent': sent})

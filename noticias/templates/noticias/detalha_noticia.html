@@ -57,12 +57,13 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="post-heading">
-            {% if noticias %}
-            <h1> {{ noticias.titulo }}</h1>
+            {% if noticia %}
+            <h1> {{ noticia.titulo }}</h1>
             <span class="meta">Publicado por
-              <a href="#">{{ noticias.fonte }}</a>
-              em {{ noticias.data_noticia}}</span>
-            {% endif %}  
+              <a href="#">{{ noticia.fonte }}</a>
+              em {{ noticia.data_noticia}}</span>
+              <a href="{% url 'noticias:compartilha_noticia' noticia.slug %}">Compartilhe a notícia</a>
+              {% endif %}  
           </div>
         </div>
       </div>
@@ -74,8 +75,8 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          {% if noticias %}
-          <p align="justify">{{ noticias.conteudo}}</p>
+          {% if noticia %}
+          <p align="justify">{{ noticia.conteudo}}</p>
           {% endif %}
           
         </div>
