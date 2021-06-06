@@ -46,15 +46,18 @@ def compartilha_noticia(request, slug):
     if request.method == 'POST':
         form = ShareNoticiaForm(request.POST)
         if form.is_valid():
-            cd = form.cleaned_data()
-            post_url = request.build.absolute_uri(noticia.get_absolute_url())
+            cd = form.cleaned_data
+            post_url = request.build_absolute_uri(noticia.get_absolute_url())
             subject = f"{cd['nome']} recomenda que você leia" \
                 f"{noticia.titulo}"
-            message = f"Read {noticia.titulo} em {post_url} \n\n" \
+            message = f" Leia {noticia.titulo} em {post_url} \n\n" \
                 f"{cd['nome']}\'s comments: {cd['comentarios']}"
-            send_mail(subject, message, 'admin@myblog.com', [cd['to']])
+            send_mail(subject, message, 'admin@myblog.com', [cd['send_to']])
 
             sent = True
+
     else:
         form = ShareNoticiaForm()
-    return render(request, "noticias/compartilha_noticia.html", {'form': form, 'noticia': noticia, 'sent': sent})
+    return render(request, "noticias/compartilha_noticia.html", {'form': form,
+                                                                 'noticia': noticia,
+                                                                 'sent': sent})

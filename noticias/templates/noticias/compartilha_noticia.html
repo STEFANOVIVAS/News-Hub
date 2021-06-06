@@ -1,4 +1,14 @@
-{% block title%} Compartilhe por e-mail a noticia " {{noticia.titulo}} " {% endblock %}
-
-
-{{ form.as_p }}
+{% block title%} Compartilhe uma notícia {% endblock %}
+{% block content %}
+    {% if sent %}
+    <h1> E-mail enviado com sucesso!</h1>
+    <p> {{ noticia.titulo}} foi enviada com sucesso para {{ form.cleaned_data.send_to}}</p>
+    {% else %}
+        <h1> Compartilhe por email a noticia "{{ noticia.titulo}}".</h1>
+        <form method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input type="submit" value="Enviar e-mail">
+        </form>
+    {% endif %}
+{% endblock %}    
