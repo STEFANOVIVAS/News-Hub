@@ -22,11 +22,11 @@ News portal with articles from the main Brazilian newspapers with free access po
 - [x] Update/manage courses as instructor.
 - [x] Search for courses by subject
 - [x] Enroll courses and access contents as students
-- [x] Responsiveness
 
-<p>
+
+<!-- <p>
   <img src="./educa_gif2.gif">
-<p/>
+<p/> -->
 
 # Deploy on heroku
 https://edu-ca.herokuapp.com/
