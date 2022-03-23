@@ -45,7 +45,7 @@ News portal with articles from the main Brazilian newspapers with free access po
 - [Bootstrap](https://getbootstrap.com/)
 - [Scrapy](https://scrapy.org/)
 
-# Auhtor
+# Author
 
 [<img src="https://avatars.githubusercontent.com/u/71469098?v=4"><br><sub>Stefano Vivas</sub>](https://github.com/STEFANOVIVAS)
 
