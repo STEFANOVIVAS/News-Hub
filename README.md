@@ -1,5 +1,5 @@
 # News-Hub
-News portal with articles from the main Brazilian newspapers with free access policy (Uol, G1, Camara), through the Web scrapping technique with the Scrapy library.
+News portal with articles from the main Brazilian newspapers with free access policy (Uol, G1, Camara), through the Web scrapping technique with the Scrapy library. Read all newspaper articles in one place.
 
 # Index
    * [About](#Educa)
@@ -15,12 +15,11 @@ News portal with articles from the main Brazilian newspapers with free access po
 :construction: Under construction :construction:
 
 # Features
-- [x] User registration/authentication as instructor or student.
-- [x] Create modules/contents as instructor with video, text, image or file.
-- [x] Delete modules/contents as instructor.
-- [x] Update/manage courses as instructor.
-- [x] Search for courses by subject
-- [x] Enroll courses and access contents as students
+- [x] Get news every day automatically with scheduler script.
+- [x] Get date, title, content, journal and URL from newspaper article.
+- [x] Filter newspaper article by journal or date.
+- [x] Send newspaper article by email.
+- [x] Read all newspaper article in one place.
 
 
 <!-- <p>
