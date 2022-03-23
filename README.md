@@ -19,12 +19,15 @@ News portal with articles from the main Brazilian newspapers with free access po
 - [x] Get date, title, content, journal and URL from newspaper article.
 - [x] Filter newspaper article by journal or date.
 - [x] Send newspaper article by email.
+- [x] Search for newspaper article of your interest 
 - [x] Read all newspaper article in one place.
 
 
-<!-- <p>
-  <img src="./educa_gif2.gif">
-<p/> -->
+<p>
+  <img src="./news-hub1.png">
+  <hr>
+  <img src="./news-hub2.png">
+<p/>
 
 
 # How to run the aplication
