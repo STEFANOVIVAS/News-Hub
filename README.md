@@ -6,7 +6,6 @@ News portal with articles from the main Brazilian newspapers with free access po
    * [Index](#Index)
    * [Status](#Status)
    * [Features](#Features)
-   * [Deploy](#Deploy-on-heroku)
    * [How to run](#How-to-run-the-aplication)
    * [Technologies](#Technologies)
    * [Author](#Author)
@@ -28,8 +27,6 @@ News portal with articles from the main Brazilian newspapers with free access po
   <img src="./educa_gif2.gif">
 <p/> -->
 
-# Deploy on heroku
-https://edu-ca.herokuapp.com/
 
 # How to run the aplication
 
@@ -50,7 +47,6 @@ https://edu-ca.herokuapp.com/
 - [Scrapy](https://scrapy.org/)
 
 # Auhtor
-
 
 [<img src="https://avatars.githubusercontent.com/u/71469098?v=4"><br><sub>Stefano Vivas</sub>](https://github.com/STEFANOVIVAS)
 
