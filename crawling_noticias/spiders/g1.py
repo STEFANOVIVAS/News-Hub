@@ -8,8 +8,10 @@ class NoticiasG1Spider(scrapy.Spider):
     start_urls = ['https://g1.globo.com']
 
     def parse(self, response):
-        links = response.xpath(
-            '//li[@class="menu-item"]//a[re:test(@href,"economia|politica|fato|blogs")]//@href').getall()
+
+        links = response.xpath('//li[@id="menu-2-economia"]/ul//li//a/@href').getall()
+        # links = response.xpath(
+        #     '//li[@class="menu-item"]//a[re:test(@href,"economia|politica|fato|blogs")]//@href').getall()
         for link in links:
             yield scrapy.Request(link, callback=self.parse_category)
 
@@ -23,21 +25,33 @@ class NoticiasG1Spider(scrapy.Spider):
                 yield scrapy.Request(sublink, callback=self.parse_category)
 
     def parse_conteudo(self, response):
-        items = CrawlingNoticiasItem()
-        titulo = response.xpath(
-            '//h1[@class="content-head__title"]//text()').get()
-        data = response.xpath(
-            '//time[@itemprop="datePublished"]//text()').get()
+         if '2022' in response.url:
+            items = CrawlingNoticiasItem()
+            titulo = response.xpath(
+                '//h1[@class="content-head__title"]//text()').get()
+            data = response.xpath(
+                '//time[@itemprop="datePublished"]//text()').get()
 
-        conteudos = response.xpath(
-            '//p[@class="content-text__container "]//text()').getall()
-        if conteudos:
-            conteudos_unificados_g1 = ''.join(conteudos)
+            conteudos = response.xpath(
+                '//p[@class="content-text__container "]//text()').getall()
+            
+            
+            if conteudos:
+                conteudos_unificados_g1 = ''.join(conteudos)
 
-            items['titulo'] = titulo
-            items['fonte'] = 'Portal G1'
-            items['data_noticia'] = data.split()[0]
-            items['conteudo'] = conteudos_unificados_g1
-            items['url'] = response.url
+                # yield{
+                #         'titulo': titulo,
+                #         'fonte' :'Portal G1',
+                #         'data_noticia' : data,
+                #         'conteudo' : conteudos_unificados_g1,
+                #         'url' : response.url
 
-            yield items
+
+                # }
+            
+                items['titulo'] = titulo
+                items['fonte'] = 'Portal G1'
+                items['data_noticia'] = data.split()[0]
+                items['conteudo'] = conteudos_unificados_g1
+                items['url'] = response.url
+                yield items

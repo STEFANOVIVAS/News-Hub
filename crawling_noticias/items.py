@@ -3,7 +3,7 @@
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/items.html
 
-
+# from scrapy import DjangoItem
 from scrapy_djangoitem import DjangoItem
 from noticias.models import Noticia
 

@@ -112,6 +112,7 @@ myvenv/
 ENV/
 env.bak/
 myvenv.bak/
+venv/
 
 # Spyder project settings
 .spyderproject
@@ -138,3 +139,5 @@ dmypy.json
 cython_debug/
 
 .vscode/
+
+*.csv
