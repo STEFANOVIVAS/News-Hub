@@ -50,7 +50,7 @@ class NoticiasG1Spider(scrapy.Spider):
                 # }
             
                 items['titulo'] = titulo
-                items['fonte'] = 'Portal G1'
+                items['fonte'] = 'Portal_G1'
                 items['data_noticia'] = data.split()[0]
                 items['conteudo'] = conteudos_unificados_g1
                 items['url'] = response.url

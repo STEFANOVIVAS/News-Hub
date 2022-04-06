@@ -48,7 +48,7 @@ class EbcNoticiasSpider(scrapy.Spider):
         # }
 
         items['titulo'] = titulo
-        items['fonte'] = 'Uol'
+        items['fonte'] = 'Ebc'
         items['data_noticia'] = data_clean.split(' ')[-1]
         items['conteudo'] = conteudos_unificados
         items['url'] = response.url
