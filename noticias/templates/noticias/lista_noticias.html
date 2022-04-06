@@ -1,36 +1,33 @@
 {% extends 'noticias/index.html' %}
 
 {% block content %}
-  <!-- Main Content -->
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
-        <div class="post-preview">
-          {% if page_obj %}
-          {% for noticia in page_obj %}
-          <a href="{{ noticia.get_absolute_url }}">
-            <h2 class="post-title"> {{ noticia.titulo }}</h2>
-          </a>
-          <p class="post-meta">Publicado por {{ noticia.fonte }} em {{ noticia.data_noticia}}</p>
-          <p>{{noticia.conteudo|truncatewords:30|linebreaks}}</p>
-          <hr>
-          {% endfor %}
-          {% else %}
-          {% endif %}
-        </div>
-      </div>  
-      
-      
-      {% include 'noticias/partials/sidebar.html' %}
-        
-        
-      
-        
+<!-- Main Content -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <div class="post-preview">
+        {% if page_obj %}
+        {% for noticia in page_obj %}
+        <a href="{{ noticia.get_absolute_url }}">
+          <h2 class="post-title"> {{ noticia.titulo }}</h2>
+        </a>
+        <p class="post-meta">Publicado por {{ noticia.fonte }} em {{ noticia.data_noticia}}</p>
+        <p>{{noticia.conteudo|truncatewords:30|linebreaks}}</p>
+        <hr>
+        {% endfor %}
+        {% else %}
+        {% endif %}
+      </div>
     </div>
-    <!-- /.row -->
-    {% include 'noticias/partials/pagination.html' %} 
+
+
+    {% include 'noticias/partials/sidebar.html' %}
+
+
+
+
   </div>
-{% endblock %}  
-      
-    
- 
+  <!-- /.row -->
+  {% include 'noticias/partials/pagination.html' %}
+</div>
+{% endblock %}
