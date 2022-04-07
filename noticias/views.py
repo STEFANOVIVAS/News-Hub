@@ -7,7 +7,7 @@ from django.core.mail import send_mail
 
 
 def lista_noticias(request):
-    noticias = Noticia.objects.order_by('-data_noticia')
+    noticias = Noticia.objects.all()
     paginator = Paginator(noticias, 20)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)

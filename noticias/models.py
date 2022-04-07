@@ -16,3 +16,6 @@ class Noticia(models.Model):
 
     def get_absolute_url(self):
         return reverse("noticias:detalha_noticia", kwargs={"slug": self.slug})
+
+    class Meta:
+        ordering = ['-data_noticia']

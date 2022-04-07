@@ -40,8 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'noticias',
     'rest_framework_simplejwt',
-
+    'django_filters',
     'api',
+    # 'crispy_forms',
 
 
 ]
@@ -141,3 +142,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 #         'rest_framework.permissions.IsAuthenticated',
 #     ],
 # }
+
+REST_FRAMEWORK={
+     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend','rest_framework.filters.SearchFilter'],
+     'DATE_INPUT_FORMATS': ["%d-%m-%Y"],
+}
+
