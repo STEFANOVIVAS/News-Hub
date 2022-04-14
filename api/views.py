@@ -4,6 +4,7 @@ from api.serializers import NoticiaSerializer
 from noticias.models import Noticia
 from rest_framework.views import APIView
 import django_filters 
+from rest_framework.permissions import IsAuthenticated
 
 
 # Create your views here.
@@ -22,7 +23,7 @@ class NoticiasFilter(django_filters.FilterSet):
 class NoticiasListView(generics.ListAPIView):
     queryset=Noticia.objects.all()
     serializer_class = NoticiaSerializer
-    
+    permission_classes=[]
     filterset_class=NoticiasFilter
     search_fields=['titulo','conteudo']
 
@@ -30,6 +31,7 @@ class NoticiasListView(generics.ListAPIView):
 class NoticiasDetailView(generics.RetrieveAPIView):
     queryset = Noticia.objects.all()
     serializer_class = NoticiaSerializer
+    permission_classes = [IsAuthenticated]
 
 
 # class NoticiaFonteView(generics.ListAPIView):
