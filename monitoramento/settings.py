@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'api',
     'users',
     'rest_framework_simplejwt.token_blacklist',
+    'drf_yasg',
     # 'crispy_forms',
 
 
@@ -157,6 +158,7 @@ REST_FRAMEWORK={
      'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ],
+    # 'DEFAULT_SCHEMA_CLASS':'rest_framework.schemas.coreapi.AutoSchema'
 }
 
 AUTH_USER_MODEL='users.NewUser'
