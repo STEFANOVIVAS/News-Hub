@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'users',
     'rest_framework_simplejwt.token_blacklist',
     'drf_yasg',
-    # 'crispy_forms',
+    'django.contrib.postgres',
+    'crispy_forms',
 
 
 ]
@@ -89,8 +90,12 @@ WSGI_APPLICATION = 'monitoramento.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'SIMIP.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'newsdb',
+        'USER':'stefano',
+        'PASSWORD': '389171',
+        'HOST':'localhost',
+        'PORT':'5432',
     }
 }
 
@@ -184,3 +189,5 @@ SIMPLE_JWT = {
 }
 
 django_on_heroku.settings(locals())
+
+CRISPY_TEMPLATE_PACK='bootstrap4'

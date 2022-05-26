@@ -1,3 +1,4 @@
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +10,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SIMIP</title>
+  <title>News hub</title>
 
   <!-- Bootstrap core CSS -->
   <link href="{% static 'noticias/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -29,40 +30,30 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand" href="{% url 'noticias:lista_noticias' %}">Start Bootstrap</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        Menu
-        <i class="fas fa-bars"></i>
-      </button>
+      
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
             <a class="nav-link" href="{% url 'noticias:lista_noticias' %}">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="about.html">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="contact.html">Contact</a>
-          </li>
+          
         </ul>
       </div>
     </div>
   </nav>
 
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('/media/img/home-bg.jpg')">
+  <header class="masthead mb-2" style="background-image: url('/media/img/home-bg.jpg')">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="col-lg-10 col-md-10 mx-auto">
           <div class="post-heading">
             {% if noticia %}
             <h1> {{ noticia.titulo }}</h1>
-            <span class="meta">Publicado por
-              <a href="#">{{ noticia.fonte }}</a>
+            <span class="meta">Publicado por {{ noticia.fonte }}
               em {{ noticia.data_noticia}}</span>
-              <a href="{% url 'noticias:compartilha_noticia' noticia.slug %}">Compartilhe a notícia</a>
+              <a class="text-white" href="{% url 'noticias:compartilha_noticia' noticia.slug %}">Compartilhe a notícia</a>
               {% endif %}  
           </div>
         </div>
@@ -74,7 +65,7 @@
   <article>
     <div class="container">
       <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="col-lg-10 col-md-10 mx-auto">
           {% if noticia %}
           <p align="justify">{{ noticia.conteudo}}</p>
           {% endif %}

@@ -1,154 +1,59 @@
+{% extends 'noticias/index.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
+{% block title %} Pesquisa noticias {% endblock %}
+{% block content %}
 
-<head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>SIMIP</title>
-
-  <!-- Bootstrap core CSS -->
-  <link href="{% static 'noticias/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-
-  <!-- Custom fonts for this template -->
-  <link href="{% static 'noticias/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
-  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-
-  <!-- Custom styles for this template -->
-  <link href="{% static 'noticias/css/clean-blog.min.css' %}" rel="stylesheet">
-
-</head>
-
-<body>
-
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-    <div class="container">
-      
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'noticias:lista_noticias' %} ">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'noticias:procurar_noticias' %}">Procurar</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">Sample Post</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="contact.html">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  
+ 
    
-    <!-- Page Header -->
-  <header class="masthead" style="background-image: url('static/noticias/home-bg.jpg')">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="site-heading">
-            <h1>SIMIP</h1>
-            <span class="subheading">Sistema de monitoramento Parlamentar</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
   <!-- Main Content -->
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
         <div class="post-preview">
-          {% if noticias %}
-          {% for noticia in noticias %}
-          <a href="{% url 'noticias:detalha_noticias' noticia.id %}">
-            <h2 class="post-title"> {{ noticia.titulo }}</h2>
-          </a>
-          <p class="post-meta">Publicado por
-            <a href="#">{{ noticia.fonte }}</a>
-            em {{ noticia.data_noticia}}</p>
-          <hr>
-          {% endfor %}
+          {% if query %}
+            <h1> Noticias contendo a palavra "{{query}}"</h1>
+            <h3>{% with results.count as total_results %}
+              {{total_results}} Encontrado{{total_results|pluralize}}
+              {% endwith %}
+            </h3>
+            <hr>
+            {% for noticia in results %}
+            <h4><a href="{{ noticia.get_absolute_url}}">{{noticia.titulo}}</a></h4>
+            <p class="post-meta">Publicado por
+              <a href="#">{{ noticia.fonte }}</a>
+              em {{ noticia.data_noticia}}</p>
+            
+            <hr>
+            {% empty %}
+              <p>Não há resultaods para a pesquisa.</p>
+            {% endfor %}
+            
+            
+           
           {% else %}
-          <div class="col-lg-8 col-md-10 mx-auto">
-              <p> Noticia não encontrada</p>
-          </div>
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <p> Noticia não encontrada</p>
+            </div>
           {% endif %}
-        </div>
-        <div class="clearfix">
-          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
-        </div>
-      </div>
-      <div class="sidebar">
-        <h5 class="card-header">Procurar notícia</h5>
-        <div class="card-body">
-          <div class="input-group">
-            <form action="{% url 'noticias:procurar_noticias' %}">
-              <input type="text" class="form-control" name="buscar" placeholder="Procurar por...">
-              <button class="btn btn-secondary" type="submit">Ir!</button>
-            </form>
           </div>
-        </div>  
-      </div>
-    </div>
-  </div>
-   
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <ul class="list-inline text-center">
-            <li class="list-inline-item">
-              <a href="#">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-          </ul>
-          <p class="copyright text-muted">Copyright &copy; Your Website 2020</p>
+          
+        </div>
+        <div class="sidebar">
+          <h5 class="card-header">Procurar notícia</h5>
+          <div class="card-body">
+            <div class="input-group">
+              <form action="{% url 'noticias:procurar_noticias' %}">
+                <input type="text" class="form-control" name="query" placeholder="Procurar por...">
+                <button class="btn btn-secondary" type="submit">Ir!</button>
+              </form>
+            </div>
+          </div>  
         </div>
       </div>
     </div>
-  </footer>
+  </div> 
+  
+{% endblock%}
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="{% static 'noticias/jquery/jquery.min.js' %}"></script>
-  <script src="{% static 'noticias/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
-  <!-- Custom scripts for this template -->
-  <script src="{% static 'noticias/js/clean-blog.min.js' %}"></script>
-
-</body>
-
-</html>
