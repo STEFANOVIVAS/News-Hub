@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path, os
 from datetime import timedelta
+import django_on_heroku
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,10 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'vh+ismustm!@_3)jveweo1m1cv=rgl#biidprero@$b8$5^u#!'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG',cast=bool,default=False)
 
 ALLOWED_HOSTS = []
 
@@ -46,7 +48,8 @@ INSTALLED_APPS = [
     'users',
     'rest_framework_simplejwt.token_blacklist',
     'drf_yasg',
-    # 'crispy_forms',
+    'django.contrib.postgres',
+    'crispy_forms',
 
 
 ]
@@ -87,8 +90,12 @@ WSGI_APPLICATION = 'monitoramento.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'SIMIP.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'newsdb',
+        'USER':'stefano',
+        'PASSWORD': '389171',
+        'HOST':'localhost',
+        'PORT':'5432',
     }
 }
 
@@ -180,3 +187,7 @@ SIMPLE_JWT = {
     'TOKEN_TYPE_CLAIM': 'token_type',
     
 }
+
+django_on_heroku.settings(locals())
+
+CRISPY_TEMPLATE_PACK='bootstrap4'

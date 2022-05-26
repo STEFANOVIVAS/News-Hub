@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Noticia
 from django.core.paginator import Paginator
-from .forms import ShareNoticiaForm
+from .forms import ShareNoticiaForm,SearchForm
 from django.core.mail import send_mail
+from django.contrib.postgres.search import SearchVector
 # Create your views here.
 
 
@@ -21,18 +22,15 @@ def detalha_noticia(request, slug):
 
 
 def procurar_noticias(request):
-    lista_noticias = Noticia.objects.order_by('-data_noticia')
-    if 'buscar' in request.GET:
-        procurar_noticias = request.GET['buscar']
-        if procurar_noticias:
-            lista_noticias = lista_noticias.filter(
-                conteudo__icontains=procurar_noticias)
-
-    dados = {
-        'noticias': lista_noticias
-    }
-
-    return render(request, 'noticias/procurar.html', dados)
+    form=SearchForm()
+    query=None
+    results=[]
+    if 'query' in request.GET:
+        form=SearchForm(request.GET)
+        if form.is_valid():
+            query=form.cleaned_data['query']
+            results=Noticia.objects.annotate(search=SearchVector('titulo','conteudo'),).filter(search=query)
+    return render(request,'noticias/procurar.html',{'form':form,'query':query,'results':results})
 
 
 def noticias_por_veiculo(request, fonte):
